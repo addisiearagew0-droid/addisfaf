@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">ያለ ደላላ</string>
+    <string name="app_subtitle">ከባለቤቱ ጋር በቀጥታ ይገናኙ — ያለ ምንም ኮሚሽን!</string>
+    <string name="tab_browse">ቤቶችን ፈልግ</string>
+    <string name="tab_post">ቤት ለጥፍ</string>
+    <string name="tab_my_account">የእኔ</string>
+    <string name="filter_all">ሁሉም</string>
+    <string name="filter_rent">ኪራይ</string>
+    <string name="filter_sale">ሽያጭ</string>
+    <string name="search_placeholder">ሰፈር ይፈልጉ (ቦሌ, ሲኤምሲ, አያት)...</string>
+    <string name="unlock_cta">ስልክ ቁጥር አሳይ (50 ብር)</string>
+    <string name="unlocked_call">ይደውሉ: %1$s</string>
+    <string name="sign_in_google">በGoogle ይግቡ • Sign in with Google</string>
+    <string name="sign_out">ውጣ (Sign out)</string>
+    <string name="telebirr_title">የባለቤቱን ስልክ ይክፈቱ</string>
+    <string name="telebirr_subtitle">የደላላ ኮሚሽን ሳይከፍሉ በቀጥታ ከቤቱ ባለቤት ጋር ለመነጋገር 50 ብር ብቻ ይክፈሉ።</string>
+    <string name="telebirr_pay_cta">በቴሌብር (Telebirr) 50 ብር ክፈል</string>
+    <string name="cancel">ተመለስ</string>
+    <string name="post_header">አዲስ ቤት ይለጥፉ</string>
+    <string name="post_submit">ቤቱን ለጥፍ</string>
+</resources>

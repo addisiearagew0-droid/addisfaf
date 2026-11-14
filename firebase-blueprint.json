@@ -1,0 +1,165 @@
+{
+  "entities": {
+    "HouseListing": {
+      "title": "HouseListing",
+      "description": "Public residential rental or sale listing without owner PII (phone numbers are stored separately in HouseContact).",
+      "type": "object",
+      "properties": {
+        "ownerId": {
+          "type": "string",
+          "description": "Firebase Auth UID of the user who posted the listing."
+        },
+        "type": {
+          "type": "string",
+          "description": "Listing type in Amharic: ኪራይ (Rent) or ሽያጭ (Sale).",
+          "enum": ["ኪራይ", "ሽያጭ"]
+        },
+        "title": {
+          "type": "string",
+          "description": "Property title and short description."
+        },
+        "location": {
+          "type": "string",
+          "description": "Neighborhood or subcity in Addis Ababa / Ethiopia."
+        },
+        "priceDisplay": {
+          "type": "string",
+          "description": "Formatted display price in Ethiopian Birr."
+        },
+        "priceAmount": {
+          "type": "integer",
+          "description": "Numeric price in Ethiopian Birr for sorting/filtering."
+        },
+        "bedrooms": {
+          "type": "integer",
+          "description": "Number of bedrooms."
+        },
+        "areaSqm": {
+          "type": "integer",
+          "description": "Approximate floor or plot area in square meters."
+        },
+        "description": {
+          "type": "string",
+          "description": "Additional property details provided by the owner."
+        },
+        "imageKey": {
+          "type": "string",
+          "description": "Bundled visual category key for property artwork.",
+          "enum": ["apartment", "condo", "villa", "service"]
+        },
+        "status": {
+          "type": "string",
+          "description": "Listing availability status.",
+          "enum": ["active", "closed"]
+        },
+        "isStarter": {
+          "type": "boolean",
+          "description": "Whether this listing is part of the initial showcase catalog."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when created (FieldValue.serverTimestamp())."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when last updated (FieldValue.serverTimestamp())."
+        }
+      },
+      "required": [
+        "ownerId",
+        "type",
+        "title",
+        "location",
+        "priceDisplay",
+        "priceAmount",
+        "bedrooms",
+        "areaSqm",
+        "description",
+        "imageKey",
+        "status",
+        "starterListing",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "HouseContact": {
+      "title": "HouseContact",
+      "description": "Isolated PII sub-document holding the owner's direct phone number, readable only by the owner or users with an unlock receipt.",
+      "type": "object",
+      "properties": {
+        "ownerId": {
+          "type": "string",
+          "description": "Firebase Auth UID of the listing owner."
+        },
+        "phone": {
+          "type": "string",
+          "description": "Direct Ethiopian phone number of the property owner."
+        },
+        "ownerName": {
+          "type": "string",
+          "description": "Optional display name of the property owner."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when created (FieldValue.serverTimestamp())."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when updated (FieldValue.serverTimestamp())."
+        }
+      },
+      "required": ["ownerId", "phone", "createdAt", "updatedAt"]
+    },
+    "ContactUnlock": {
+      "title": "ContactUnlock",
+      "description": "Immutable receipt proving the user paid the 50 ETB Telebirr unlock fee for a specific house listing.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Firebase Auth UID of the user who unlocked the contact."
+        },
+        "houseId": {
+          "type": "string",
+          "description": "Document ID of the unlocked house listing."
+        },
+        "amountBirr": {
+          "type": "integer",
+          "description": "Fee paid in ETB (50)."
+        },
+        "paymentMethod": {
+          "type": "string",
+          "description": "Payment channel used (e.g. telebirr)."
+        },
+        "transactionRef": {
+          "type": "string",
+          "description": "Generated Telebirr payment reference code."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when unlocked (FieldValue.serverTimestamp())."
+        }
+      },
+      "required": ["userId", "houseId", "amountBirr", "paymentMethod", "transactionRef", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/houses/{houseId}": {
+      "schema": { "$ref": "#/entities/HouseListing" },
+      "description": "Publicly browsable house rental and sale listings without owner phone PII."
+    },
+    "/houses/{houseId}/contact/{contactId}": {
+      "schema": { "$ref": "#/entities/HouseContact" },
+      "description": "Private contact info document ('private') gated by ownership or a verified unlock receipt."
+    },
+    "/users/{userId}/unlocks/{houseId}": {
+      "schema": { "$ref": "#/entities/ContactUnlock" },
+      "description": "Per-user immutable receipts of unlocked house owner phone numbers."
+    }
+  }
+}

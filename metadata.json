@@ -1,0 +1,6 @@
+{
+  "name": "ያለ ደላላ",
+  "description": "የቤት ኪራይ እና ሽያጭ ያለ ደላላ ኮሚሽን ከባለቤቱ ጋር በቀጥታ የሚያገናኝ የአንድሮይድ መተግበሪያ (Yaledelala Direct Home Rental & Sale).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
